@@ -1,12 +1,12 @@
-package cz.welli.letmein.controller;
+package cz.welli.letmein.controllers;
 
-import cz.welli.letmein.entity.User;
+import cz.welli.letmein.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class CustomUserDetails implements UserDetails {
+public class  CustomUserDetails implements UserDetails {
     private User user;
 
     public CustomUserDetails(User user) {

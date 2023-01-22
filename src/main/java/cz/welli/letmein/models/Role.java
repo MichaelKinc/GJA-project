@@ -1,6 +1,7 @@
-package cz.welli.letmein.entity;
+package cz.welli.letmein.models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.Set;
 
 @Entity

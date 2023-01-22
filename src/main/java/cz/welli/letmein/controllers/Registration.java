@@ -1,34 +1,25 @@
-package cz.welli.letmein;
+package cz.welli.letmein.controllers;
 
-import cz.welli.letmein.entity.User;
-import cz.welli.letmein.repository.UserRepository;
+import cz.welli.letmein.models.User;
+import cz.welli.letmein.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.context.request.WebRequest;
-
-import java.util.List;
 
 @Controller
-public class AppController {
-
+public class Registration {
     @Autowired
     private UserRepository userRepo;
 
-    @GetMapping("")
-    public String viewHomePage() {
-        return "index";
-    }
-
-    @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
+    @GetMapping("/registration")
+    public String setupRegistration(Model model) {
         model.addAttribute("user", new User());
-
-        return "signup_form";
+        return "registration";
     }
+
 
     @PostMapping("/process_register")
     public String processRegister(User user) {

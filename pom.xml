@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.5</version>
+		<version>3.0.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>cz.welli</groupId>
@@ -16,7 +16,7 @@
 	<description>Web application for reservation and access system management</description>
 	<properties>
 		<java.version>17</java.version>
-		<spring.framework.boot.version>2.7.5</spring.framework.boot.version>
+		<spring.framework.boot.version>3.0.1</spring.framework.boot.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -101,13 +101,13 @@
                                 <task>
                                     <exec>
                                         <directory>src/main/frontend</directory>
-                                        <command>npm.cmd install</command>
+                                        <command>npm install</command>
                                     </exec>
                                 </task>
                                 <task>
                                     <exec>
                                         <directory>src/main/frontend</directory>
-                                        <command>npm.cmd run build</command>
+                                        <command>npm run build</command>
                                     </exec>
                                 </task>
                             </tasks>

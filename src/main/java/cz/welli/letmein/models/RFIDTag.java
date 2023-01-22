@@ -1,6 +1,8 @@
-package cz.welli.letmein.entity;
+package cz.welli.letmein.models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
+//import javax.persistence.*;
 
 @Entity
 public class RFIDTag {
