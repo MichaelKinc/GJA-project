@@ -37,7 +37,7 @@ public class WebSecurityConfig {
     SecurityFilterChain web(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/", "/login", "/registration").permitAll()
+                        .requestMatchers("/", "/login", "/registration", "/process_register").permitAll()
                         .requestMatchers("/home").authenticated()
                         .requestMatchers("/home/admin").hasRole("ADMIN")
                         .anyRequest().denyAll()

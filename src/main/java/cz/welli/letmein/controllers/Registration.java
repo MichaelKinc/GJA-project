@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 @Controller
 public class Registration {
     @Autowired
@@ -22,13 +24,19 @@ public class Registration {
 
 
     @PostMapping("/process_register")
-    public String processRegister(User user) {
+    public String processRegister(User user, Model model) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
-        userRepo.save(user);
+        try {
+            userRepo.save(user);
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", "Ups, this email, already exist");
+            return "registration";
+        }
 
+        model.addAttribute("errorMsg", "");
         return "register_success";
     }
 }

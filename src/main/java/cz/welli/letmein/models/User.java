@@ -25,8 +25,8 @@ public class User {
     @OneToMany
     Set<RFIDTag> rfidTags;
 
-    @ManyToOne
-    Role role;
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole = UserRole.USER;
 
     public Long getId() {
         return id;
