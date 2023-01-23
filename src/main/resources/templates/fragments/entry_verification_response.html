@@ -7,13 +7,13 @@
             <p class="text-2xl">Přístup udělen</p>
         </div>
 
-        <button class="mt-4 flex gap-x-2 flex-row px-6 items-center justify-between w-full border active:border-indigo-500 border-transparent bg-indigo-500 text-white justify-center py-6 rounded-md font-medium text-xl">
+        <a th:href="@{/kiosk}" class="mt-4 flex gap-x-2 flex-row px-6 items-center justify-between w-full border active:border-indigo-500 border-transparent bg-indigo-500 text-white justify-center py-6 rounded-md font-medium text-xl">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-8 h-8">
                 <path fill-rule="evenodd" d="M18 10a.75.75 0 01-.75.75H4.66l2.1 1.95a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 111.02 1.1l-2.1 1.95h12.59A.75.75 0 0118 10z" clip-rule="evenodd" />
             </svg>
             <span>Zpět na zadání kódu</span>
             <span></span>
-        </button>
+        </a>
     </div>
 </div>
 <div th:fragment="fail">
@@ -25,12 +25,12 @@
             <p class="text-2xl">Chybný přístupový kód.</p>
         </div>
 
-        <button class="mt-4 flex gap-x-2 flex-row px-6 items-center justify-between w-full border active:border-indigo-500 border-transparent bg-indigo-500 text-white justify-center py-6 rounded-md font-medium text-xl">
+        <a th:href="@{/kiosk}" class="mt-4 flex gap-x-2 flex-row px-6 items-center justify-between w-full border active:border-indigo-500 border-transparent bg-indigo-500 text-white justify-center py-6 rounded-md font-medium text-xl">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-8 h-8">
                 <path fill-rule="evenodd" d="M18 10a.75.75 0 01-.75.75H4.66l2.1 1.95a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 111.02 1.1l-2.1 1.95h12.59A.75.75 0 0118 10z" clip-rule="evenodd" />
             </svg>
             <span>Opakovat zadání kódu</span>
             <span></span>
-        </button>
+        </a>
     </div>
 </div>

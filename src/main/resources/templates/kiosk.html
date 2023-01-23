@@ -46,6 +46,7 @@
                                    break;
                                case "submit":
                                    if (digits.length() === digits.maxLength) {
+                                       $("form#pin-form").find("input[name='pin']").val(digits.toString());
                                        $("form#pin-form").submit();
                                    }
                                    break;
@@ -108,7 +109,7 @@
 
             <div th:case="false" class="py-5 flex flex-col gap-y-16">
                 <div>
-                    <form id="pin-form" action="#" method="post" autocomplete="off" data-autosubmit="true" class="multi-digit flex flex-row justify-center items-center gap-x-6">
+                    <form id="pin-form" th:action="@{/kiosk}" method="post" autocomplete="off" data-autosubmit="false" class="multi-digit flex flex-row justify-center items-center gap-x-6">
                         <div class="flex flex-row justify-between gap-x-2">
                             <input readonly data-digit-pos="0" class="digit-slot text-center text-2xl font-semibold placeholder:text-slate-400 bg-slate-50 w-20 h-20 rounded-xl shadow-xl outline-none"></input>
                             <input readonly data-digit-pos="1" class="digit-slot text-center text-2xl font-semibold placeholder:text-slate-400 bg-slate-50 w-20 h-20 rounded-xl shadow-xl outline-none"></input>
@@ -118,6 +119,7 @@
                             <input readonly data-digit-pos="4" class="digit-slot text-center text-2xl font-semibold placeholder:text-slate-400 bg-slate-50 w-20 h-20 rounded-xl shadow-xl outline-none"></input>
                             <input readonly data-digit-pos="5" class="digit-slot text-center text-2xl font-semibold placeholder:text-slate-400 bg-slate-50 w-20 h-20 rounded-xl shadow-xl outline-none"></input>
                         </div>
+                        <input type="hidden" name="pin" value="">
                     </form>
                 </div>
 
