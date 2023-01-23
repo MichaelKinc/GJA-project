@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<head>
+    <title>Kiosk view</title>
+    <script th:inline="javascript">
+        $(function() {
+            var digits = new DigitStack(6);
+
+            const digitSlots = $('.multi-digit').find('input.digit-slot');
+            digitSlots.each(function() {
+                $(this).attr('maxlength', 1);
+            });
+
+            $('.keyboard').find('button.keyboard-btn').each(function() {
+                $(this).on('mouseup', function(e) {
+                   if (e.button === 0) {
+                       const value = $(this).data('value');
+                       if (Number.isInteger(value)) {
+                           digits.addDigit(value);
+
+                           $('.multi-digit').find('input.digit-slot').each(function() {
+                               $(this).attr('maxlength', 1);
+                               $(this).val(null);
+                               const digitPos = $(this).data('digitPos');
+
+                               if (digits.length() > digitPos) {
+                                   $(this).val(digits.atPos(digitPos));
+                               }
+                           });
+                       } else {
+                           switch(value) {
+                               case "backspace":
+                                   digits.removeDigit();
+
+                                   $('.multi-digit').find('input.digit-slot').each(function() {
+                                       $(this).attr('maxlength', 1);
+                                       $(this).val(null);
+                                       const digitPos = $(this).data('digitPos');
+
+                                       if (digits.length() > digitPos) {
+                                           $(this).val(digits.atPos(digitPos));
+                                       }
+                                   });
+                                   break;
+                               case "submit":
+                                   if (digits.length() === digits.maxLength) {
+                                       $("form#pin-form").submit();
+                                   }
+                                   break;
+                           }
+                       }
+
+                       let isSubmitDisabled = digits.length() !== digits.maxLength;
+                       $('.keyboard').find('button.keyboard-btn[data-value="submit"]').attr('disabled', isSubmitDisabled);
+
+                       if (!isSubmitDisabled) {
+                           const submitForm = $("form#pin-form");
+                           if (submitForm.data("autosubmit")) {
+                               submitForm.submit();
+                           }
+                       }
+                   }
+                });
+            });
+        });
+
+        function DigitStack (max_length) {
+            this.maxLength = max_length;
+            this.lastDigitIndex = 0;
+            this.digits = [];
+
+            this.addDigit = (digit) => {
+                if (this.digits.length < this.maxLength) {
+                    this.digits.push(digit);
+                    this.lastDigitIndex += 1;
+                }
+            }
+            this.removeDigit = () => {
+                if (this.digits.length > 0) {
+                    this.digits.pop();
+                    this.lastDigitIndex -= 1;
+                }
+            }
+            this.length = () => {
+                return this.digits.length;
+            }
+            this.atPos = (pos) => {
+                return this.digits.at(pos);
+            }
+            this.toString = () => {
+                return this.digits.join("");
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-200">
+    <div layout:fragment="content" class="h-screen w-full overflow-x-hidden flex flex-col justify-between">
+        <div class="pt-12 pb-6">
+            <div class="container mx-auto text-center flex flex-col gap-y-4">
+                <h1 class="text-4xl font-medium">Vítejte v <span class="text-indigo-500">Saunový svět Michaela Kince</span></h1>
+                <p class="text-slate-600">Pro přístup zadejte kód, který jste obrdželi při vytvoření rezervace.</p>
+            </div>
+        </div>
+
+        <div th:switch="${uploaded}" class="w-full md:max-w-xl md:mx-auto py-4">
+
+            <div th:case="false" class="py-5 flex flex-col gap-y-16">
+                <div>
+                    <form id="pin-form" action="#" method="post" autocomplete="off" data-autosubmit="true" class="multi-digit flex flex-row justify-center items-center gap-x-6">
+                        <div class="flex flex-row justify-between gap-x-2">
+                            <input readonly data-digit-pos="0" class="digit-slot text-center text-2xl font-semibold placeholder:text-slate-400 bg-slate-50 w-20 h-20 rounded-xl shadow-xl outline-none"></input>
+                            <input readonly data-digit-pos="1" class="digit-slot text-center text-2xl font-semibold placeholder:text-slate-400 bg-slate-50 w-20 h-20 rounded-xl shadow-xl outline-none"></input>
+                            <input readonly data-digit-pos="2" class="digit-slot text-center text-2xl font-semibold placeholder:text-slate-400 bg-slate-50 w-20 h-20 rounded-xl shadow-xl outline-none"></input>
+                            <span class="px-4">&nbsp;</span>
+                            <input readonly data-digit-pos="3" class="digit-slot text-center text-2xl font-semibold placeholder:text-slate-400 bg-slate-50 w-20 h-20 rounded-xl shadow-xl outline-none"></input>
+                            <input readonly data-digit-pos="4" class="digit-slot text-center text-2xl font-semibold placeholder:text-slate-400 bg-slate-50 w-20 h-20 rounded-xl shadow-xl outline-none"></input>
+                            <input readonly data-digit-pos="5" class="digit-slot text-center text-2xl font-semibold placeholder:text-slate-400 bg-slate-50 w-20 h-20 rounded-xl shadow-xl outline-none"></input>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="keyboard grid grid-cols-3 gap-4">
+                    <button data-value="1" type="button" class="keyboard-btn flex border-2 active:border-slate-600 border-transparent bg-white justify-center py-4 rounded-md font-semibold text-xl">1</button>
+                    <button data-value="2" type="button" class="keyboard-btn flex border-2 active:border-slate-600 border-transparent bg-white justify-center py-4 rounded-md font-semibold text-xl">2</button>
+                    <button data-value="3" type="button" class="keyboard-btn flex border-2 active:border-slate-600 border-transparent bg-white justify-center py-4 rounded-md font-semibold text-xl">3</button>
+                    <button data-value="4" type="button" class="keyboard-btn flex border-2 active:border-slate-600 border-transparent bg-white justify-center py-4 rounded-md font-semibold text-xl">4</button>
+                    <button data-value="5" type="button" class="keyboard-btn flex border-2 active:border-slate-600 border-transparent bg-white justify-center py-4 rounded-md font-semibold text-xl">5</button>
+                    <button data-value="6" type="button" class="keyboard-btn flex border-2 active:border-slate-600 border-transparent bg-white justify-center py-4 rounded-md font-semibold text-xl">6</button>
+                    <button data-value="7" type="button" class="keyboard-btn flex border-2 active:border-slate-600 border-transparent bg-white justify-center py-4 rounded-md font-semibold text-xl">7</button>
+                    <button data-value="8" type="button" class="keyboard-btn flex border-2 active:border-slate-600 border-transparent bg-white justify-center py-4 rounded-md font-semibold text-xl">8</button>
+                    <button data-value="9" type="button" class="keyboard-btn flex border-2 active:border-slate-600 border-transparent bg-white justify-center py-4 rounded-md font-semibold text-xl">9</button>
+                    <div></div>
+                    <button data-value="0" type="button" class="keyboard-btn flex border-2 active:border-slate-600 border-transparent bg-white justify-center py-4 rounded-md font-semibold text-xl">0</button>
+                    <button data-value="backspace" type="button" class="keyboard-btn flex border-2 active:border-indigo-600 border-transparent bg-indigo-500 text-white justify-center py-4 rounded-md font-semibold text-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path fill-rule="evenodd" d="M2.515 10.674a1.875 1.875 0 000 2.652L8.89 19.7c.352.351.829.549 1.326.549H19.5a3 3 0 003-3V6.75a3 3 0 00-3-3h-9.284c-.497 0-.974.198-1.326.55l-6.375 6.374zM12.53 9.22a.75.75 0 10-1.06 1.06L13.19 12l-1.72 1.72a.75.75 0 101.06 1.06l1.72-1.72 1.72 1.72a.75.75 0 101.06-1.06L15.31 12l1.72-1.72a.75.75 0 10-1.06-1.06l-1.72 1.72-1.72-1.72z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <button data-value="submit" type="button" disabled="disabled" class="keyboard-btn col-span-3 mt-4 flex border-2 active:border-indigo-600 border-transparent bg-indigo-500 disabled:bg-indigo-400 disabled:border-transparent text-white justify-center py-6 rounded-md font-medium text-xl">
+                        Potvrdit
+                    </button>
+                </div>
+            </div>
+
+            <div th:case="true">
+                <div th:replace="${verification_result == 'success'} ?
+                    ~{fragments/entry_verification_response :: success} :
+                    ~{fragments/entry_verification_response :: fail}">
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center py-4 text-slate-400">
+            &copy; 2022 Welli s.r.o. - LetMeIn
+        </footer>
+    </div>
+</body>
+</html>

@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tailwindcss -i ./app.css -o ../resources/static/app.css",
-    "watch": "tailwindcss -i ./app.css --watch"
+    "watch": "tailwindcss -i ./app.css --watch",
+    "watch:html": "onchange '../resources/templates/**/*.{html,js}' -- npm-run-all --serial build:css build:html",
+    "watch:serve": "browser-sync start --no-inject-changes --proxy localhost:8080 --files 'target/classes/templates' 'target/classes/static'"
   },
   "devDependencies": {
     "tailwindcss": "^3.2.4"

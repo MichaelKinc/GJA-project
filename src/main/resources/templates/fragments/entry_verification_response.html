@@ -1,0 +1,36 @@
+<div th:fragment="success">
+    <div class="flex flex-col justify-center items-center gap-y-6">
+        <div class="flex flex-col items-center gap-y-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-48 h-48 text-green-500">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p class="text-2xl">Přístup udělen</p>
+        </div>
+
+        <button class="mt-4 flex gap-x-2 flex-row px-6 items-center justify-between w-full border active:border-indigo-500 border-transparent bg-indigo-500 text-white justify-center py-6 rounded-md font-medium text-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-8 h-8">
+                <path fill-rule="evenodd" d="M18 10a.75.75 0 01-.75.75H4.66l2.1 1.95a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 111.02 1.1l-2.1 1.95h12.59A.75.75 0 0118 10z" clip-rule="evenodd" />
+            </svg>
+            <span>Zpět na zadání kódu</span>
+            <span></span>
+        </button>
+    </div>
+</div>
+<div th:fragment="fail">
+    <div class="flex flex-col justify-center items-center gap-y-6">
+        <div class="flex flex-col items-center gap-y-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-48 h-48 text-red-400">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+            </svg>
+            <p class="text-2xl">Chybný přístupový kód.</p>
+        </div>
+
+        <button class="mt-4 flex gap-x-2 flex-row px-6 items-center justify-between w-full border active:border-indigo-500 border-transparent bg-indigo-500 text-white justify-center py-6 rounded-md font-medium text-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-8 h-8">
+                <path fill-rule="evenodd" d="M18 10a.75.75 0 01-.75.75H4.66l2.1 1.95a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 111.02 1.1l-2.1 1.95h12.59A.75.75 0 0118 10z" clip-rule="evenodd" />
+            </svg>
+            <span>Opakovat zadání kódu</span>
+            <span></span>
+        </button>
+    </div>
+</div>
