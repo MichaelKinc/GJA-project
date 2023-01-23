@@ -1,7 +1,7 @@
 package cz.welli.letmein.models;
 
-import jakarta.persistence.*;
-
+//import jakarta.persistence.*;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -24,6 +24,10 @@ public class User {
 
     @OneToMany
     Set<RFIDTag> rfidTags;
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole = UserRole.USER;

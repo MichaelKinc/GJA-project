@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.1</version>
+		<version>2.7.8</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>cz.welli</groupId>
@@ -16,7 +16,8 @@
 	<description>Web application for reservation and access system management</description>
 	<properties>
 		<java.version>17</java.version>
-		<spring.framework.boot.version>3.0.1</spring.framework.boot.version>
+		<spring.framework.boot.version>2.7.8</spring.framework.boot.version>
+		<spring-security.version>5.8.0</spring-security.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -76,6 +77,29 @@
 		<artifactId>mariadb-java-client</artifactId>
 		<version>3.1.1</version>
 		</dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.security</groupId>-->
+<!--			<artifactId>spring-security-config</artifactId>-->
+<!--			<version>5.8.1</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework</groupId>-->
+<!--			<artifactId>spring-aop</artifactId>-->
+<!--			<version>5.3.25</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.security</groupId>-->
+<!--			<artifactId>spring-security-web</artifactId>-->
+<!--			<version>5.8.1</version>-->
+<!--		</dependency>-->
+
+
+
 	</dependencies>
 
 	<build>

@@ -16,18 +16,18 @@ public class Registration {
     @Autowired
     private UserRepository userRepo;
 
-    @GetMapping("/registration")
+    @GetMapping("/register")
     public String setupRegistration(Model model) {
         model.addAttribute("user", new User());
-        return "registration";
+        return "register";
     }
 
 
     @PostMapping("/process_register")
     public String processRegister(User user, Model model) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        String encodedPassword = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(encodedPassword);
 
         try {
             userRepo.save(user);

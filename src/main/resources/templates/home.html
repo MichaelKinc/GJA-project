@@ -9,7 +9,11 @@
 <body>
 <h1 class="mt-2 text-xl" th:text="'Home'" />
 
-<a th:href="@{/login}" class="btn btn-danger">Logout</a>
+<!--<a th:href="@{/logout}" class="btn btn-danger">Logout</a>-->
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="logout" />
+</form>
 
 </body>
 </html>
