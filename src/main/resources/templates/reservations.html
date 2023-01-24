@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/app}">
+<head>
+    <title>LetMeIn - Rezervace</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- this is where we refer the css file from src/main/resources/static/main.css -->
+    <link th:href="@{/app.css}" rel="stylesheet" />
+</head>
+<body>
+<div layout:fragment="header">Správa rezervací</div>
+<div layout:fragment="content">
+    <div class="flex flex-row justify-end">
+        <a th:href="@{/user/reservations/create}" class="font-medium inline-flex items-center gap-x-1 bg-indigo-500 hover:bg-indigo-400 transition-colors duration-150 rounded-md font-semibold px-4 py-2 text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                <path d="M10.75 6.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z" />
+            </svg>
+            Vytvořit rezervaci
+        </a>
+    </div>
+
+    Nádherná tabulka <3
+</div>
+</body>
+</html>

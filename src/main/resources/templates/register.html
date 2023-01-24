@@ -29,11 +29,8 @@
                 <div class="flex-1 flex flex-col justify-center">
                     <form th:action="@{/process_register}" th:object="${user}"
                           method="post" class="flex flex-col gap-y-6">
-                        <p th:if="${param.error}" th:class="text-red-400">
-                            Chybné uživatelské jméno nebo heslo.
-                        </p>
-                        <p th:if="${param.logout}">
-                            Byl jste odhlášen.
+                        <p th:if="${errorMsg != null}" th:text="${errorMsg}" th:class="text-red-400">
+                            Chyba při validaci
                         </p>
 
                         <div>
@@ -46,11 +43,11 @@
                         </div>
                         <div>
                             <label for="firstName" class="font-medium mb-4">Jméno</label>
-                            <input type="password" id="firstName" th:field="*{firstName}" placeholder="Heslo" class="w-full rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'" />
+                            <input type="text" id="firstName" th:field="*{firstName}" placeholder="Jméno" class="w-full rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'" />
                         </div>
                         <div>
                             <label for="lastName" class="font-medium mb-4">Příjmení</label>
-                            <input type="password" id="lastName" th:field="*{lastName}" placeholder="Heslo" class="w-full rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'" />
+                            <input type="text" id="lastName" th:field="*{lastName}" placeholder="Příjmení" class="w-full rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'" />
                         </div>
 
                         <button type="submit" class="flex border-2 active:border-indigo-600 border-transparent hover:bg-indigo-400 bg-indigo-500 disabled:bg-indigo-400 disabled:border-transparent text-white justify-center py-3 rounded-md font-medium">Registrujte se</button>

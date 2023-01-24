@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/app}">
+<head>
+    <title>LetMeIn - Vytvořit rezervaci</title>
+</head>
+<body>
+<div layout:fragment="header">
+    Vytvořit rezervaci
+</div>
+<div layout:fragment="content">
+    <div th:if="${step == 1}" class="flex flex-row justify-start pb-3">
+        <a th:href="@{/user/reservations}" class="inline-flex items-center gap-x-2 px-3 py-1 rounded-md border border-slate-400 bg-white text-slate-600 hover:bg-slate-100">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                <path fill-rule="evenodd" d="M15 10a.75.75 0 01-.75.75H7.612l2.158 1.96a.75.75 0 11-1.04 1.08l-3.5-3.25a.75.75 0 010-1.08l3.5-3.25a.75.75 0 111.04 1.08L7.612 9.25h6.638A.75.75 0 0115 10z" clip-rule="evenodd" />
+            </svg>
+            <span class="flex-1">Zpět</span>
+        </a>
+    </div>
+    <div class="mt-4 flex flex-col gap-y-16">
+        <div th:switch="${step}">
+            <div th:case="1">
+                <div th:replace="~{fragments/reservation-create-form-steps :: step-1}"></div>
+            </div>
+            <div th:case="2">
+                <div th:replace="~{fragments/reservation-create-form-steps :: step-2}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

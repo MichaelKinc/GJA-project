@@ -38,6 +38,6 @@ public class ActivityController {
     public String saveActivity(@ModelAttribute Activity activity) {
         activityRepository.save(activity);
         System.out.println(activity.getType());
-        return "redirect:/home/admin/show-activities";
+        return "redirect:/admin/show-activities";
     }
 }
