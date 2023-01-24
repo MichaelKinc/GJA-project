@@ -12,12 +12,6 @@ public class Home {
     EmailServiceImpl es;
     @GetMapping("/home")
     public String setupHome() {
-
-        es.sendSimpleMessage("kmk@sdsds.cs", "test", "test message");
-
-
-
-
         return "home";
     }
 
