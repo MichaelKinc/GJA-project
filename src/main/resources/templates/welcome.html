@@ -1,19 +1,13 @@
 <!DOCTYPE HTML>
-<html lang="cs" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/app}">
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Welcome to LetMeIn</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- this is where we refer the css file from src/main/resources/static/main.css -->
     <link th:href="@{/app.css}" rel="stylesheet" />
 </head>
 <body>
-<h1 class="mt-2 text-xl" th:text="Welcome" />
-
-
-<a th:href="@{/login}" class="btn btn-danger">Login</a>
-<a th:href="@{/register}" class="btn btn-danger">Register</a>
-
+    <a th:href="@{/login}" class="btn btn-danger">Login</a>
+    <a th:href="@{/register}" class="btn btn-danger">Register</a>
 </body>
 </html>
