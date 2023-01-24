@@ -18,7 +18,7 @@ public class ActivityController {
     @Autowired
     private ActivityRepository activityRepository;
 
-    @GetMapping("/home/admin/show-activities")
+    @GetMapping("/admin/show-activities")
     public ModelAndView showActivities() {
         ModelAndView mav = new ModelAndView("activities");
         List<Activity> activities = activityRepository.findAll();
@@ -26,7 +26,7 @@ public class ActivityController {
         return mav;
     }
 
-    @GetMapping("/home/admin/add-activity")
+    @GetMapping("/admin/add-activity")
     public ModelAndView showAddActivityForm() {
         ModelAndView mav = new ModelAndView("add-activity-form");
         Activity activity = new Activity();
@@ -34,7 +34,7 @@ public class ActivityController {
         return mav;
     }
 
-    @PostMapping("/home/admin/save-activity")
+    @PostMapping("/admin/save-activity")
     public String saveActivity(@ModelAttribute Activity activity) {
         activityRepository.save(activity);
         System.out.println(activity.getType());
