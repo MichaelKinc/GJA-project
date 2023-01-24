@@ -1,7 +1,8 @@
 package cz.welli.letmein.models;
 
 public enum UserRole {
-    USER,
-    ADMIN,
-    KIOSK
+    ROLE_USER,
+    ROLE_ADMIN,
+    ROLE_KIOSK
 }
+

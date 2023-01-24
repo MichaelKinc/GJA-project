@@ -33,7 +33,7 @@ public class Registration {
             userRepo.save(user);
         } catch (Exception e) {
             model.addAttribute("errorMsg", "Ups, this email, already exist");
-            return "registration";
+            return "register";
         }
 
         model.addAttribute("errorMsg", "");

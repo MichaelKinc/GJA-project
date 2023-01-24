@@ -25,12 +25,8 @@ public class User {
     @OneToMany
     Set<RFIDTag> rfidTags;
 
-    public UserRole getUserRole() {
-        return userRole;
-    }
-
     @Enumerated(EnumType.STRING)
-    private UserRole userRole = UserRole.USER;
+    private UserRole userRole = UserRole.ROLE_USER;
 
     public Long getId() {
         return id;
@@ -66,6 +62,10 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getUserRole() {
+        return userRole.toString();
     }
 
     @Override

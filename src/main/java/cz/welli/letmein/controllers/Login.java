@@ -16,7 +16,6 @@ public class Login {
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
-        System.out.println("Login");
         if (error != null)
             model.addAttribute("errorMsg", "Your username and password are invalid.");
 
