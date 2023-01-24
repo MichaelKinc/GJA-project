@@ -129,13 +129,13 @@
                                 <task>
                                     <exec>
                                         <directory>src/main/frontend</directory>
-                                        <command>npm.cmd install</command>
+                                        <command>npm install</command>
                                     </exec>
                                 </task>
                                 <task>
                                     <exec>
                                         <directory>src/main/frontend</directory>
-                                        <command>npm.cmd run build</command>
+                                        <command>npm run build</command>
                                     </exec>
                                 </task>
                             </tasks>
