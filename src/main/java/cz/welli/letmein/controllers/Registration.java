@@ -2,6 +2,7 @@ package cz.welli.letmein.controllers;
 
 import cz.welli.letmein.models.User;
 import cz.welli.letmein.repositories.UserRepository;
+import cz.welli.letmein.services.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public class Registration {
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    EmailServiceImpl emailService;
 
     @GetMapping("/register")
     public String setupRegistration(Model model) {
@@ -36,6 +39,8 @@ public class Registration {
             return "register";
         }
 
+        emailService.sendConfirmUserRegistration(user.getEmail(), user.getFullName(), user.getFirstName(),
+                user.getLastName());
         model.addAttribute("errorMsg", "");
         return "register_success";
     }

@@ -72,6 +72,10 @@ public class User {
         return userRole.toString();
     }
 
+    public String getFullName() {
+        return firstName +" "+ lastName;
+    }
+
     @Override
     public String toString() {
         return String.format(

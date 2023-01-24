@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class Home {
-
-    @Autowired
-    EmailServiceImpl es;
     @GetMapping("/home")
     public String setupHome() {
         return "home";
