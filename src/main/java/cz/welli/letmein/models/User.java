@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +23,14 @@ public class User {
     @Column(nullable = false, length = 20)
     private String lastName;
 
-    @OneToMany
-    Set<RFIDTag> rfidTags;
-
     @Enumerated(EnumType.STRING)
     private UserRole userRole = UserRole.ROLE_USER;
+
+    @OneToMany(mappedBy = "user")
+    Set<Tag> tags;
+
+    @OneToMany(mappedBy = "user")
+    Set<Reservation> reservations;
 
     public Long getId() {
         return id;
