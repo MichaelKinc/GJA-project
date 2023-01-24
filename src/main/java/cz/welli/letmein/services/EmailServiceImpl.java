@@ -12,8 +12,9 @@ import javax.mail.internet.MimeMessage;
 @Component
 public class EmailServiceImpl {
 
-    private String sender = "noreply@LetMeIn.com";
-    private String subject = "Potvrzení rezervace";
+    final String sender = "noreply@LetMeIn.com";
+    final String subject = "Potvrzení rezervace";
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -154,7 +155,7 @@ public class EmailServiceImpl {
                             "                      <td align=\"left\" style=\"padding:0;Margin:0\"><h3 style=\"Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:'Space Grotesk', sans-serif;font-size:24px;font-style:normal;font-weight:normal;color:#051923\"><strong>Potvrzení rezervace</strong><br><strong>uživatele</strong>: <span style=\"color:#6366f1\"><strong>"+fullName+"</strong></span></h3><p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#1F1F1F;font-size:16px\"><br></p></td>\n" +
                             "                     </tr>\n" +
                             "                     <tr>\n" +
-                            "                      <td align=\"left\" style=\"padding:0;Margin:0\"><p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#1F1F1F;font-size:16px\">Prosím potvrďte rezervaci přihlášením se pomocí tohoto linku: <a target=\"_blank\" style=\"-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#6366f1;font-size:16px\" href=\"\">localhost:8080/home</a><br><br><br><br><br><br><br><br><br><br><br></p></td>\n" +
+                            "                      <td align=\"left\" style=\"padding:0;Margin:0\"><p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#1F1F1F;font-size:16px\">Prosím potvrďte rezervaci přihlášením se pomocí tohoto linku: <a target=\"_blank\" style=\"-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#6366f1;font-size:16px\" href=\"\">http://localhost:8080/home</a><br><br><br><br><br><br><br><br><br><br><br></p></td>\n" +
                             "                     </tr>\n" +
                             "                   </table></td>\n" +
                             "                 </tr>\n" +
@@ -334,7 +335,7 @@ public class EmailServiceImpl {
                     "                       </table></td>\n" +
                     "                     </tr>\n" +
                     "                     <tr>\n" +
-                    "                      <td align=\"left\" style=\"padding:0;Margin:0\"><p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#1F1F1F;font-size:16px\">Rezervaci je možné zrušit na adrese: <a target=\"_blank\" style=\"-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#6366f1;font-size:16px\" href=\"\">localhost:8080/user/reservation/" + reservationId + "</a><br></p></td>\n" +
+                    "                      <td align=\"left\" style=\"padding:0;Margin:0\"><p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#1F1F1F;font-size:16px\">Rezervaci je možné zrušit na adrese: <a target=\"_blank\" style=\"-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#6366f1;font-size:16px\" href=\"\">http://localhost:8080/user/reservation/" + reservationId + "</a><br></p></td>\n" +
                     "                     </tr>\n" +
                     "                   </table></td>\n" +
                     "                 </tr>\n" +
