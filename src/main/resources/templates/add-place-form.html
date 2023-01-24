@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <!-- this is where we refer the css file from src/main/resources/static/main.css -->
+  <link th:href="@{/app.css}" rel="stylesheet" />
+</head>
+<body>
+<form th:action="@{/save-place}" method="POST">
+  <div class="mt-4">
+    <div class="mt-4">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="from">
+        Od:
+      </label>
+      <input type="time" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 md:mb-0 leading-tight focus:outline-none focus:bg-white" id="from">
+    </div>
+    <div class="mt-4">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="to">
+        Do:
+      </label>
+      <input type="time" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 md:mb-0 leading-tight focus:outline-none focus:bg-white" id="to">
+    </div>
+    <div class="mt-4">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="window">
+        Velikost časového okna:
+      </label>
+      <input type="number" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 md:mb-0 leading-tight focus:outline-none focus:bg-white" id="window">
+    </div>
+    <div class="mt-4">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="capacity">
+        Kapacita:
+      </label>
+      <input type="number" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 md:mb-0 leading-tight focus:outline-none focus:bg-white" id="capacity">
+    </div>
+    <div class="mt-4">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="position">
+        Název:
+      </label>
+      <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 md:mb-0 leading-tight focus:outline-none focus:bg-white" id="position">
+    </div>
+  </div>
+</form>
+</body>
+</html>
