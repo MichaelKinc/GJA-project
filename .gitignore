@@ -10,6 +10,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+src/main/resources/static/app.css
+
 ### STS ###
 .apt_generated
 .classpath
