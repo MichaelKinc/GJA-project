@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -30,5 +32,12 @@ public class ActivityController {
         Activity activity = new Activity();
         mav.addObject("activity", activity);
         return mav;
+    }
+
+    @PostMapping("/save-activity")
+    public String saveActivity(@ModelAttribute Activity activity) {
+        activityRepository.save(activity);
+        System.out.println(activity.getType());
+        return "redirect:/show-activities";
     }
 }
