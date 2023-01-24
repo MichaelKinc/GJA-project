@@ -69,7 +69,6 @@ auth.authenticationProvider(authenticationProvider());
                 .antMatchers("/", "/login", "/register", "/process_register", "/register_success", "/error").permitAll()
                 .antMatchers("/home").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/home/admin").hasAnyRole( "ADMIN")
-                .antMatchers("/addNewEmployee").hasAnyRole("ADMIN")
                 .antMatchers("/kiosk").hasRole("KIOSK")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").successHandler(authenticationSuccessHandler).permitAll()
