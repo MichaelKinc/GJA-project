@@ -38,7 +38,7 @@ public class UserReservationForm {
         return "UserReservationsForm [activity=" + activity.getType() + "place="+ place.getCapacity() +"]";
     }
 
-    public int getProgressStep() {
+    /*public int getProgressStep() {
         int step = 1;
         if (activity != null) {
             step = 2;
@@ -58,5 +58,5 @@ public class UserReservationForm {
 
     public boolean currentStepAheadOfStep(int step) {
         return getProgressStep() > step;
-    }
+    }*/
 }

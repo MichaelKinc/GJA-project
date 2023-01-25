@@ -10,7 +10,7 @@
     Vytvořit rezervaci
 </div>
 <div layout:fragment="content">
-    <div th:if="${reservation.isStep(1)}" class="flex flex-row justify-start pb-6">
+    <div th:if="${step == 1}" class="flex flex-row justify-start pb-6">
         <a th:href="@{/user/reservations}" class="inline-flex items-center gap-x-2 px-3 py-1 rounded-md border border-slate-400 bg-white text-slate-600 hover:bg-slate-100">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                 <path fill-rule="evenodd" d="M15 10a.75.75 0 01-.75.75H7.612l2.158 1.96a.75.75 0 11-1.04 1.08l-3.5-3.25a.75.75 0 010-1.08l3.5-3.25a.75.75 0 111.04 1.08L7.612 9.25h6.638A.75.75 0 0115 10z" clip-rule="evenodd" />
@@ -21,25 +21,25 @@
 
     <div class="relative mb-3 flex flex-row items-center justify-between">
         <div class="absolute top-1/2 w-full h-1 bg-indigo-500 -z-10 pointer-events-none transform -translate-y-1/2">&nbsp;</div>
-        <div class="flex flex-row p-4 rounded-md" th:classappend="${reservation.isStep(1)} ? 'bg-indigo-500 text-white' : 'bg-slate-100'">
+        <div class="flex flex-row p-4 rounded-md" th:classappend="${step == 1} ? 'bg-indigo-500 text-white' : 'bg-slate-100'">
             1. Výběr aktivity
         </div>
-        <div class="flex flex-row p-4 rounded-md" th:classappend="${reservation.isStep(2)} ? 'bg-indigo-500 text-white' : 'bg-slate-100'">
+        <div class="flex flex-row p-4 rounded-md" th:classappend="${step == 2} ? 'bg-indigo-500 text-white' : 'bg-slate-100'">
             2. Výběr místa
         </div>
-        <div class="flex flex-row p-4 bg-slate-100 rounded-md">
+        <div class="flex flex-row p-4 rounded-md" th:classappend="${step == 3} ? 'bg-indigo-500 text-white' : 'bg-slate-100'">
             3. Výběr data
         </div>
-        <div class="flex flex-row p-4 bg-slate-100 rounded-md">
+        <div class="flex flex-row p-4 rounded-md" th:classappend="${step == 4} ? 'bg-indigo-500 text-white' : 'bg-slate-100'">
             4. Výběr termínu
         </div>
-        <div class="flex flex-row p-4 bg-slate-100 rounded-md">
+        <div class="flex flex-row p-4 rounded-md" th:classappend="${step == 5} ? 'bg-indigo-500 text-white' : 'bg-slate-100'">
             5. Potvrzení
         </div>
     </div>
     <div class="mt-4 flex flex-col gap-y-16">
         <div class="p-8 bg-slate-100 rounded-xl">
-            <div th:switch="${reservation.getProgressStep()}">
+            <div th:switch="${step}">
                 <h2 th:case="1" class="text-3xl font-medium">Krok 1: Výběr aktivity</h2>
                 <h2 th:case="2" class="text-3xl font-medium">Krok 2: Výběr místa</h2>
                 <h2 th:case="3" class="text-3xl font-medium">Krok 3: Výběr data</h2>
@@ -47,32 +47,30 @@
                 <h2 th:case="5" class="text-3xl font-medium">Krok 5: Souhrn a potvrzení</h2>
             </div>
             <form th:action="@{/user/reservations/create}" th:object="${reservation}" method="post" class="mt-4 flex flex-col gap-y-4">
-                <div th:if="${reservation.isStep(1)}">
+                <div th:if="${step == 1}">
                     <label for="activity" class="font-medium">Aktivita</label>
                     <!--<input th:if="${!reservation.isStep(1)}" th:value="${reservation.getActivity().getType()}" type="text" readonly class="w-full rounded border border-slate-400 px-4 py-2 placeholder:text-slate-400 read-only:bg-slate-100 read-only:text-slate-600 read-only:opacity-50">-->
                     <select id="activity" name="activity" th:field="*{activity}" class="w-full rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'">
                         <option th:each="activity: ${activities}" th:value="${activity.getId()}" th:text="${activity.getType()}">Aktivita</option>
                     </select>
                 </div>
-                <div th:if="${reservation.isStep(2)}">
+                <div th:if="${step == 2}">
                     <label for="place" class="font-medium mb-4">Místo</label>
                     <select id="place" name="place" th:field="*{place}" class="w-full rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'">
                         <option th:each="place: ${places}" th:value="${place.getId()}" th:text="${place.getId()}">Místo</option>
                     </select>
                 </div>
-                <div th:if="${reservation.isStep(3)}">
+                <div th:if="${step == 3}">
                     <label for="date" class="font-medium mb-4">Datum</label>
-                    <select id="date" name="activity" class="w-full rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'">
-                        <option value="telocvicna-1">Tělocvična 1</option>
-                    </select>
+                    <input type="date" id="date" th:field="*{date}" class="w-full rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'">
                 </div>
-                <div th:if="${reservation.isStep(4)}">
+                <div th:if="${step == 4}">
                     <label for="slot" class="font-medium mb-4">Termín</label>
                     <select id="slot" name="activity" class="w-full rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'">
                         <option value="telocvicna-1">Tělocvična 1</option>
                     </select>
                 </div>
-                <div th:if="${reservation.isStep(5)}">
+                <div th:if="${step == 5}">
                     <div class="flex flex-col gap-x-2">
                         <div>Aktivita:</div>
                         <div th:text="${reservation.getActivity().getType()}"></div>
@@ -87,7 +85,8 @@
                     </div>
                 </div>
 
-                <button type="submit" value="step-1" class="mt-4 font-medium inline-flex items-center gap-x-1 bg-indigo-500 hover:bg-indigo-400 transition-colors duration-150 rounded-md font-semibold px-6 py-3 text-white">Další krok</button>
+                <button type="submit" name="action" value="back">Zpět</button>
+                <button type="submit" name="action" value="next" class="mt-4 font-medium inline-flex items-center gap-x-1 bg-indigo-500 hover:bg-indigo-400 transition-colors duration-150 rounded-md font-semibold px-6 py-3 text-white">Další krok</button>
             </form>
         </div>
     </div>
