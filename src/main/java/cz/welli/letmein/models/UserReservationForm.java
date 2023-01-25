@@ -29,8 +29,11 @@ public class UserReservationForm {
         return date;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDate(String date) {
+        if (date.isEmpty()) {
+            return;
+        }
+        this.date = LocalDate.parse(date);
     }
 
     @Override
