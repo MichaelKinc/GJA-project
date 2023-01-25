@@ -11,7 +11,7 @@
     </div>
     <div layout:fragment="content">
         <div class="flex flex-row justify-start pb-3">
-            <a th:href="@{/admin/show-activities}" class="inline-flex items-center gap-x-2 px-3 py-1 rounded-md border border-slate-400 bg-white text-slate-600 hover:bg-slate-100">
+            <a th:href="@{/admin/activities}" class="inline-flex items-center gap-x-2 px-3 py-1 rounded-md border border-slate-400 bg-white text-slate-600 hover:bg-slate-100">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                     <path fill-rule="evenodd" d="M15 10a.75.75 0 01-.75.75H7.612l2.158 1.96a.75.75 0 11-1.04 1.08l-3.5-3.25a.75.75 0 010-1.08l3.5-3.25a.75.75 0 111.04 1.08L7.612 9.25h6.638A.75.75 0 0115 10z" clip-rule="evenodd" />
                 </svg>
@@ -19,7 +19,7 @@
             </a>
         </div>
         <div class="py-4">
-            <form th:action="@{/admin/save-activity}" th:object="${activity}" method="POST">
+            <form th:action="@{/admin/activities/create}" th:object="${activity}" method="POST">
                 <input type="text" id="type" name="type" class="form-control col-4 mb-4 border border-slate-400 px-3 py-2 rounded-md" placeholder="Enter Name" />
                 <button type="submit">Uložit</button>
             </form>

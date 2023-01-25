@@ -33,4 +33,12 @@ public class Activity {
     public void setType(String type) {
         this.type = type;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setPlaces(Set<Place> places) {
+        this.places = places;
+    }
 }

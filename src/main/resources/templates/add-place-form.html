@@ -1,5 +1,8 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="cs" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/app}">
+<head>
 <head>
   <title>Getting Started: Serving Web Content</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,39 +10,70 @@
   <link th:href="@{/app.css}" rel="stylesheet" />
 </head>
 <body>
-<form th:action="@{/home/admin/save-place}" method="POST">
-  <div class="mt-4">
-    <div class="mt-4">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="from">
-        Od:
-      </label>
-      <input type="time" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 md:mb-0 leading-tight focus:outline-none focus:bg-white" id="from">
-    </div>
-    <div class="mt-4">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="to">
-        Do:
-      </label>
-      <input type="time" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 md:mb-0 leading-tight focus:outline-none focus:bg-white" id="to">
-    </div>
-    <div class="mt-4">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="window">
-        Velikost časového okna:
-      </label>
-      <input type="number" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 md:mb-0 leading-tight focus:outline-none focus:bg-white" id="window">
-    </div>
-    <div class="mt-4">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="capacity">
-        Kapacita:
-      </label>
-      <input type="number" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 md:mb-0 leading-tight focus:outline-none focus:bg-white" id="capacity">
-    </div>
-    <div class="mt-4">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="position">
-        Název:
-      </label>
-      <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-4 md:mb-0 leading-tight focus:outline-none focus:bg-white" id="position">
-    </div>
+  <div layout:fragment="header">
+    Přidat místo
   </div>
-</form>
+  <div layout:fragment="content">
+    <div class="flex flex-row justify-start pb-3">
+      <a th:href="@{/admin/places}" class="inline-flex items-center gap-x-2 px-3 py-1 rounded-md border border-slate-400 bg-white text-slate-600 hover:bg-slate-100">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+          <path fill-rule="evenodd" d="M15 10a.75.75 0 01-.75.75H7.612l2.158 1.96a.75.75 0 11-1.04 1.08l-3.5-3.25a.75.75 0 010-1.08l3.5-3.25a.75.75 0 111.04 1.08L7.612 9.25h6.638A.75.75 0 0115 10z" clip-rule="evenodd" />
+        </svg>
+        <span class="flex-1">Zpět</span>
+      </a>
+    </div>
+    <form th:action="@{/admin/places/create}" th:object="${place}" method="post" class="flex flex-col gap-y-6">
+      <div class="flex flex-row justify-between flex-wrap">
+        <div>
+          <label for="name" class="block font-medium mb-2">Název</label>
+          <input type="text" id="name" name="name" class="rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500"/>
+        </div>
+        <div>
+          <label for="start" class="block font-medium mb-2">Od</label>
+          <input type="time" id="start" name="start" class="rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500"/>
+        </div>
+        <div>
+          <label for="start" class="block font-medium mb-2">Do</label>
+          <input type="time" id="end" name="end" class="rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'" />
+        </div>
+        <div>
+          <label for="timeWindow" class="block font-medium mb-2">Časové okno rezervace</label>
+          <input type="number" id="timeWindow" name="timeWindow" min="1" max="24" placeholder="2" class="rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'" />
+        </div>
+        <div>
+          <label for="capacity" class="block font-medium mb-2">Kapacita okna</label>
+          <input type="number" min="0" id="capacity" name="capacity" placeholder="2" class="rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'" />
+        </div>
+        <!--<div>
+          <label for="season" class="block font-medium mb-2">Sezóna</label>
+          <select name="season" id="season" class="rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500">
+            <option th:each="season: ${seasons}" th:value="${season.id}" th:text="${season.start+' - '+season.end}"></option>
+          </select>
+        </div>-->
+      </div>
+      <div class="flex flex-row justify-between">
+        <div>
+          <label class="block font-medium mb-2">Sezóna</label>
+          <ul>
+            <li th:each="season : ${seasons}">
+              <div>
+                <input type="checkbox" th:field="*{seasons}" th:value="${season.id}">
+                <label th:text="${season.start+' - '+season.end}"></label>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <label for="activity" class="block font-medium mb-2">Aktivita</label>
+          <select id="activity" th:field="*{activity}">
+            <option th:each="activity : ${activities}" th:value="${activity.id}" th:text="${activity.type}">
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="flex border-2 active:border-indigo-600 border-transparent hover:bg-indigo-400 bg-indigo-500 disabled:bg-indigo-400 disabled:border-transparent text-white justify-center py-3 rounded-md font-medium">Přidat</button>
+    </form>
+  </div>
 </body>
 </html>

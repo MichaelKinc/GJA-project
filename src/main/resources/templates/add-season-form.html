@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/app}">
+<head>
+    <head>
+        <title>Getting Started: Serving Web Content</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- this is where we refer the css file from src/main/resources/static/main.css -->
+        <link th:href="@{/app.css}" rel="stylesheet" />
+    </head>
+<body>
+<div layout:fragment="header">
+    Přidat sezónu
+</div>
+<div layout:fragment="content">
+    <div class="flex flex-row justify-start pb-3">
+        <a th:href="@{/admin/seasons}" class="inline-flex items-center gap-x-2 px-3 py-1 rounded-md border border-slate-400 bg-white text-slate-600 hover:bg-slate-100">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                <path fill-rule="evenodd" d="M15 10a.75.75 0 01-.75.75H7.612l2.158 1.96a.75.75 0 11-1.04 1.08l-3.5-3.25a.75.75 0 010-1.08l3.5-3.25a.75.75 0 111.04 1.08L7.612 9.25h6.638A.75.75 0 0115 10z" clip-rule="evenodd" />
+            </svg>
+            <span class="flex-1">Zpět</span>
+        </a>
+    </div>
+    <form th:action="@{/admin/seasons/create}" method="post" class="flex flex-col gap-y-6">
+        <div class="flex flex-row justify-between flex-wrap">
+            <div>
+                <label for="start" class="block font-medium mb-2">Od</label>
+                <input type="date" id="start" name="start" class="rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500"/>
+            </div>
+            <div>
+                <label for="start" class="block font-medium mb-2">Do</label>
+                <input type="date" id="end" name="end" class="rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500"/>
+            </div>
+        </div>
+
+        <button type="submit" class="flex border-2 active:border-indigo-600 border-transparent hover:bg-indigo-400 bg-indigo-500 disabled:bg-indigo-400 disabled:border-transparent text-white justify-center py-3 rounded-md font-medium">Přidat</button>
+    </form>
+    <div th:if="${errorMsg != null}" th:text="${errorMsg}">
+    </div>
+</div>
+</body>
+</html>
