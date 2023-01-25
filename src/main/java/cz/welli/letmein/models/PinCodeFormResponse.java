@@ -1,4 +1,4 @@
-package cz.welli.letmein.entity;
+package cz.welli.letmein.models;
 
 public class PinCodeFormResponse {
     private String pin;

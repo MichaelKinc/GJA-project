@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import cz.welli.letmein.entity.PinCodeFormResponse;
+import cz.welli.letmein.models.PinCodeFormResponse;
 
 @Controller
 public class KioskController {
