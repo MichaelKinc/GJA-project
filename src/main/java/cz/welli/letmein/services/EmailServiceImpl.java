@@ -207,6 +207,7 @@ public class EmailServiceImpl {
     public String sendConfirmEventRegistration(String recipientEmail, Long reservationId, String name, String pin, String date, String sport,
                                           String location, Integer reservations) {
 
+        System.out.println("Email sending");
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper;
 

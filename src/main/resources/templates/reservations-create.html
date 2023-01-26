@@ -57,7 +57,7 @@
                 <div th:if="${step == 2}">
                     <label for="place" class="font-medium mb-4">Místo</label>
                     <select id="place" name="place" th:field="*{place}" class="w-full rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'">
-                        <option th:each="place: ${places}" th:value="${place.getId()}" th:text="${place.getId()}">Místo</option>
+                        <option th:each="place: ${places}" th:value="${place.getId()}" th:text="${place.getName()}">Místo</option>
                     </select>
                 </div>
                 <div th:if="${step == 3}">
@@ -65,28 +65,59 @@
                     <input type="date" id="date" th:field="*{date}" class="w-full rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'">
                 </div>
                 <div th:if="${step == 4}">
-                    <label for="slot" class="font-medium mb-4">Termín</label>
-                    <select id="slot" name="activity" class="w-full rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'">
-                        <option value="telocvicna-1">Tělocvična 1</option>
-                    </select>
+                    <label class="font-medium mb-4">Termín</label>
+
+                    <ul>
+                        <li th:each="slot: ${slots}">
+                            <input type="radio" th:field="*{start}" th:value="${slot.getFrom()}">
+                            <label th:for="${#ids.prev('start')}" th:text="${slot.getFrom() + '-' + slot.getTo() + ': ' + slot.getAvailableCapacity() + '/' + slot.getMaxCapacity()}"></label>
+                        </li>
+                    </ul>
+
+                    <div class="flex-1">
+                        <label for="requiredCapacity">Počet osob:</label>
+                        <input type="number" min="1" th:field="*{requiredCapacity}" id="requiredCapacity" th:value="1" class="bg-slate-200 border border-slate-600">
+                    </div>
                 </div>
+
                 <div th:if="${step == 5}">
-                    <div class="flex flex-col gap-x-2">
-                        <div>Aktivita:</div>
-                        <div th:text="${reservation.getActivity().getType()}"></div>
+                    <div class="flex flex-row gap-x-2">
+                        <div class="font-medium">Aktivita:</div>
+                        <div th:text="${selectedActivity.getType()}"></div>
                     </div>
-                    <div class="flex flex-col gap-x-2">
-                        <div>Místo:</div>
-                        <div th:text="${reservation.getPlace()}"></div>
+                    <div class="flex flex-row gap-x-2">
+                        <div class="font-medium">Místo:</div>
+                        <div th:text="${selectedPlace.getName()}"></div>
                     </div>
-                    <div class="flex flex-col gap-x-2">
-                        <div>Datum:</div>
-                        <div th:text="${reservation.getDate()}"></div>
+                    <div class="flex flex-row gap-x-2">
+                        <div class="font-medium">Datum:</div>
+                        <div th:text="${selectedSlot.toLocalDate()}"></div>
+                    </div>
+                    <div class="flex flex-row gap-x-2">
+                        <div class="font-medium">Počet osob:</div>
+                        <div th:text="${selectedCapacity}"></div>
+                    </div>
+                    <div class="flex flex-row gap-x-2">
+                        <div class="font-medium">Vybraný termín:</div>
+                        <div th:text="${selectedSlot.toLocalTime() + '-' + selectedSlot.plusHours(selectedPlace.getTimeWindow()).toLocalTime()}"></div>
+                    </div>
+
+                    <div class="mt-6 flex gap-x-2">
+                        <input type="checkbox" th:field="*{confirmation}" />
+                        <label th:for="${#ids.prev('confirmation')}">Souhlasím s obchodními podmínkami a závazně potvrzuji rezervaci.</label>
                     </div>
                 </div>
 
                 <button type="submit" name="action" value="back">Zpět</button>
-                <button type="submit" name="action" value="next" class="mt-4 font-medium inline-flex items-center gap-x-1 bg-indigo-500 hover:bg-indigo-400 transition-colors duration-150 rounded-md font-semibold px-6 py-3 text-white">Další krok</button>
+                <button
+                        type="submit"
+                        name="action"
+                        value="next"
+                        class="mt-4 font-medium inline-flex items-center gap-x-1 bg-indigo-500 hover:bg-indigo-400 transition-colors duration-150 rounded-md font-semibold px-6 py-3 text-white"
+                        th:text="${step != 5} ? 'Další krok' : 'Potvrdit a rezervovat'"
+                >
+                    Další krok
+                </button>
             </form>
         </div>
     </div>

@@ -1,12 +1,18 @@
 package cz.welli.letmein.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class UserReservationForm {
     private Activity activity;
     private Place place;
-
     private LocalDate date;
+
+    /** Attributes for creating Reservation object */
+    private LocalTime start;
+    private int requiredCapacity;
+    private boolean confirmation;
 
     public Activity getActivity() {
         return activity;
@@ -34,6 +40,30 @@ public class UserReservationForm {
             return;
         }
         this.date = LocalDate.parse(date);
+    }
+
+    public LocalTime getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = LocalTime.parse(start);
+    }
+
+    public int getRequiredCapacity() {
+        return requiredCapacity;
+    }
+
+    public void setRequiredCapacity(int requiredCapacity) {
+        this.requiredCapacity = requiredCapacity;
+    }
+
+    public boolean isConfirmation() {
+        return confirmation;
+    }
+
+    public void setConfirmation(boolean confirmation) {
+        this.confirmation = confirmation;
     }
 
     @Override

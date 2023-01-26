@@ -4,7 +4,10 @@ import javax.persistence.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "places")
@@ -108,5 +111,10 @@ public class Place {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Reservation> findByDateTime(LocalDateTime concreteLocalDateTime) {
+        Predicate<Reservation> byDateTime = reservation -> reservation.getStart().isEqual(concreteLocalDateTime);
+        return reservations.stream().filter(byDateTime).collect(Collectors.toList());
     }
 }

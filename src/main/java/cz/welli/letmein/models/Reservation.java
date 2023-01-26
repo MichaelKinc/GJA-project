@@ -10,14 +10,17 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "DATETIME")
     private LocalDateTime start;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "DATETIME")
     private LocalDateTime end;
 
     @Column(nullable = false, length = 10)
     private Integer persons;
+
+    @Column(nullable = false, length = 6)
+    private String pin;
 
     @ManyToOne
     User user;
@@ -71,5 +74,13 @@ public class Reservation {
 
     public void setPlace(Place place) {
         this.place = place;
+    }
+
+    public String getPin() {
+        return pin;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
     }
 }
