@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
+/**
+ * Method of this class is responsible for routing after login
+ */
 @Configuration
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
