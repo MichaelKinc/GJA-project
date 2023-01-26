@@ -30,10 +30,6 @@ public class User {
         this.id = id;
     }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
-    }
-
     public Set<Tag> getTags() {
         return tags;
     }

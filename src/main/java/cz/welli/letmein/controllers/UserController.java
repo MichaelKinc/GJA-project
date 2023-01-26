@@ -3,6 +3,7 @@ package cz.welli.letmein.controllers;
 import cz.welli.letmein.dto.AddPlaceForm;
 import cz.welli.letmein.dto.AddUserForm;
 import cz.welli.letmein.models.*;
+import cz.welli.letmein.repositories.ReservationRepository;
 import cz.welli.letmein.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     @GetMapping("/admin/users")
     public ModelAndView showUsers() {
@@ -79,5 +83,18 @@ public class UserController {
         user.setUserRole(userFromDb.getUserRoleRaw());
         mav.addObject("user", user);
         return mav;
+    }
+
+    @PostMapping("/admin/users/delete")
+    public String deleteActivity(@RequestParam("userId") Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            List<Reservation> reservations = reservationRepository.findByUser(user.get());
+            if(reservations.size() > 0) {
+                reservationRepository.deleteAll(reservations);
+            }
+            userRepository.delete(user.get());
+        }
+        return "redirect:/admin/users";
     }
 }
