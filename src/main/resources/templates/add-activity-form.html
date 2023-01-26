@@ -20,7 +20,8 @@
         </div>
         <div class="py-4">
             <form th:action="@{/admin/activities/create}" th:object="${activity}" method="POST">
-                <input type="text" id="type" name="type" class="form-control col-4 mb-4 border border-slate-400 px-3 py-2 rounded-md" placeholder="Enter Name" />
+                <input type="text" id="type" th:field="*{type}" class="form-control col-4 mb-4 border border-slate-400 px-3 py-2 rounded-md" placeholder="Enter Name" />
+                <input type="hidden" th:field="*{id}" />
                 <button type="submit">Uložit</button>
             </form>
         </div>

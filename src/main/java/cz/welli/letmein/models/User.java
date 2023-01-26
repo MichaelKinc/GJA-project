@@ -26,6 +26,30 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole userRole = UserRole.ROLE_USER;
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
     @OneToMany(mappedBy = "user")
     Set<Tag> tags;
 
@@ -75,6 +99,7 @@ public class User {
     public void setUserRole(UserRole role) {
         this.userRole = role;
     }
+    public UserRole getUserRoleRaw() { return userRole; }
 
     public String getFullName() {
         return firstName +" "+ lastName;

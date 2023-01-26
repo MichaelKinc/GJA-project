@@ -1,5 +1,6 @@
 package cz.welli.letmein.controllers;
 
+import cz.welli.letmein.models.Activity;
 import cz.welli.letmein.models.Place;
 import cz.welli.letmein.models.Season;
 import cz.welli.letmein.repositories.SeasonRepository;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -31,7 +33,7 @@ public class SeasonController {
     public ModelAndView showAddActivityForm() {
         ModelAndView mav = new ModelAndView("add-season-form");
         Season season = new Season();
-        mav.addObject("place", season);
+        mav.addObject("season", season);
         return mav;
     }
 
