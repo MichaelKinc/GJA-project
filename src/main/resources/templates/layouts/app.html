@@ -53,14 +53,14 @@
                             <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span>
                         </a>
                     </li>-->
-                    <li sec:authorize="hasRole('ROLE_ADMIN')">
+                    <!--<li sec:authorize="hasRole('ROLE_ADMIN')">
                         <a href="#" class="flex items-center px-2 py-3 text-base font-normal text-gray-900 hover:bg-slate-200 transition-colors duration-150 rounded-lg">
                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 w-6 h-6 text-gray-900 transition duration-75 group-hover:text-gray-900">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             <span class="flex-1 ml-3 font-medium whitespace-nowrap">Správa rezervací</span>
                         </a>
-                    </li>
+                    </li>-->
                     <li sec:authorize="hasRole('ROLE_USER')">
                         <a th:href="@{/user/reservations}" class="flex items-center px-2 py-3 text-base font-normal text-gray-900 hover:bg-slate-200 transition-colors duration-150 rounded-lg" th:classappend="${#request.requestURI.startsWith('/user/reservations') ? 'bg-slate-200':''}">
                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 w-6 h-6 text-gray-900 transition duration-75 group-hover:text-gray-900">
