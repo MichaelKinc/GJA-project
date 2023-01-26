@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- *
+ * Home view controller
  */
 @Controller
 public class Home {

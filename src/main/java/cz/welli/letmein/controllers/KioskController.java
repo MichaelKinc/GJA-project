@@ -15,17 +15,31 @@ import cz.welli.letmein.models.PinCodeFormResponse;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Kiosk view controller
+ */
 @Controller
 public class KioskController {
     @Autowired
     ReservationRepository reservationRepository;
 
+    /**
+     * Get kiosk view
+     * @param model
+     * @return kiosk view file name
+     */
     @GetMapping("/kiosk")
     String getKiosk (Model model) {
         model.addAttribute("uploaded", false);
         return "kiosk";
     }
 
+    /**
+     * Verify pin code method
+     * @param pin
+     * @param model
+     * @return
+     */
     @PostMapping("/kiosk")
     String verifyKioskCode (PinCodeFormResponse pin, Model model) {
         if (pin.isValid()) {

@@ -16,6 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Activity view controller
+ */
 @Controller
 public class ActivityController {
 
@@ -24,6 +27,10 @@ public class ActivityController {
     @Autowired
     private PlaceRepository placeRepository;
 
+    /**
+     * Activities table view
+     * @return Model and view of activities
+     */
     @GetMapping("/admin/activities")
     public ModelAndView showActivities() {
         ModelAndView mav = new ModelAndView("activities");
@@ -32,6 +39,10 @@ public class ActivityController {
         return mav;
     }
 
+    /**
+     * Activities create view
+     * @return Model and view of activity detail
+     */
     @GetMapping("/admin/activities/create")
     public ModelAndView showAddActivityForm() {
         ModelAndView mav = new ModelAndView("add-activity-form");
@@ -40,6 +51,11 @@ public class ActivityController {
         return mav;
     }
 
+    /**
+     * Update activity view
+     * @param activityId id of activity
+     * @return Model and view of activity detail
+     */
     @GetMapping("/admin/activities/update")
     public ModelAndView showUpdateActivityForm(@RequestParam Long activityId) {
         ModelAndView mav = new ModelAndView("add-activity-form");
@@ -48,6 +64,11 @@ public class ActivityController {
         return mav;
     }
 
+    /**
+     * Delete activity route
+     * @param activityId id of activity
+     * @return redirect to admin/activities
+     */
     @GetMapping("/admin/activities/delete")
     public String deleteActivity(@RequestParam Long activityId) {
         Optional<Activity> activity = activityRepository.findById(activityId);
@@ -60,6 +81,11 @@ public class ActivityController {
     }
 
 
+    /**
+     * Create activity route
+     * @param activity id of activity
+     * @return redirect to admin/activities
+     */
     @PostMapping("/admin/activities/create")
     public String saveActivity(@ModelAttribute Activity activity) {
         activityRepository.save(activity);
