@@ -4,7 +4,6 @@ import cz.welli.letmein.services.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,14 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
-
-
-//import jakarta.activation.DataSource
 
 
 @Configuration
@@ -78,17 +72,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().csrf();
     }
 
-////todo replace with bcrypt which is commented lower
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        // This PasswordEncoder is provided for legacy and testing purposes only
-//        // and is not considered secure. A password encoder that does nothing.
-//        @SuppressWarnings("deprecation")
-//        PasswordEncoder pe = NoOpPasswordEncoder.getInstance();
-//
-//        return pe;
-//    }
 
+    /**
+     * Provide Bcrypt implementation of encoder
+     * @return BCryptPasswordEncoder encoder
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

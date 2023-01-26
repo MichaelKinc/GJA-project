@@ -26,7 +26,7 @@ public class Home {
 
     /**
      * Return home view
-     * @param model
+     * @param model model
      * @return String home view name
      */
     @GetMapping("/home")
