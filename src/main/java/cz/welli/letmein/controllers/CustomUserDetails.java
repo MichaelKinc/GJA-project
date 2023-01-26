@@ -11,9 +11,19 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * User details view controller
+ */
 public class  CustomUserDetails implements UserDetails {
+    /**
+     * Custom user class
+     */
     private User user;
 
+    /**
+     * Constructor
+     * @param user user
+     */
     public CustomUserDetails(User user) {
         this.user = user;
     }
