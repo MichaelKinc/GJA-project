@@ -52,7 +52,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-center" th:text="${reservation.getStart().toLocalTime()}"></td>
             <td class="px-6 py-4 whitespace-nowrap text-center" th:text="${reservation.getEnd().toLocalTime()}"></td>
             <td class="px-6 py-4 whitespace-nowrap text-center" th:text="${reservation.getPersons()}"></td>
-            <td class="px-6 py-4 whitespace-nowrap text-center" th:text="${reservation.getPin()}" th:classappend="${now.isAfter(reservation.getStart())} ? 'line-through text-red-500' : ''"></td>
+            <td class="px-6 py-4 whitespace-nowrap text-center" th:text="${reservation.getPin()}" th:classappend="${now.isAfter(reservation.getStart().plusMinutes(59))} ? 'line-through text-red-500' : ''"></td>
             <td class="px-6 py-4 whitespace-nowrap text-center" th:text="${reservation.getPlace().getName()}"></td>
             <td th:if="${now.isBefore(reservation.getStart())}" class="px-6 py-4 whitespace-nowrap font-semibold text-center flex justify-center gap-x-2">
                 <form th:action="@{/user/reservations/delete/{id}(id=${reservation.getId()})}" th:method="post">

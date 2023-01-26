@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ *
+ */
 @Controller
 public class Home {
     @Autowired
@@ -21,6 +24,11 @@ public class Home {
     @Autowired
     ReservationRepository reservationRepository;
 
+    /**
+     * Return home view
+     * @param model
+     * @return String home view name
+     */
     @GetMapping("/home")
     public String setupHome(Model model) {
         String activeUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
