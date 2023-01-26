@@ -1,17 +1,26 @@
 package cz.welli.letmein.controllers;
 
-import cz.welli.letmein.models.User;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import  org.springframework.security.core.Authentication;
 
+/**
+ * Class responsible for requests for /login route
+ */
 @Controller
 public class Login {
 
+    /**
+     * Method for processing get request at route /login
+     *
+     * @param model model
+     * @param error if not null, error message is exposed
+     * @param logout if not null, logout message is exposed
+     * @return redirect to /home if is user authenticated, login view otherwise
+     */
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
         if (error != null)
@@ -21,25 +30,16 @@ public class Login {
             model.addAttribute("msg", "You have been logged out successfully.");
 
         if(authenticated()){
-            return "home";
+            return "redirect:/home";
         }
 
         return "login";
     }
 
-    @PostMapping("/login")
-    public String processLogin(User user, Model model) {
-
-//        UserRepository repo;
-//
-//        User user1 = repo.findByEmail(user.getEmail());
-
-        return "home";
-    }
 
     /**
      * Determines if a user is already authenticated.
-     * @return
+     * @return True if is request authenticated
      */
     private boolean authenticated() {
         Authentication authentication = SecurityContextHolder.getContext()
