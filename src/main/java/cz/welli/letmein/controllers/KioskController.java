@@ -36,9 +36,10 @@ public class KioskController {
 
     /**
      * Verify pin code method
-     * @param pin
-     * @param model
-     * @return
+     *
+     * @param pin pin given by user
+     * @param model model
+     * @return kiosk view
      */
     @PostMapping("/kiosk")
     String verifyKioskCode (PinCodeFormResponse pin, Model model) {
