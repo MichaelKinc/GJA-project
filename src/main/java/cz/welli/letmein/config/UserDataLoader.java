@@ -20,33 +20,32 @@ public class UserDataLoader implements CommandLineRunner {
     }
 
     private void loadUserData() {
-        System.out.println(userRepository.count());
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (userRepository.count() == 0) {
+
             User admin = new User();
             admin.setEmail("admin@admin.cz");
             admin.setFirstName("Admin");
             admin.setLastName("Admin");
             admin.setPassword(passwordEncoder.encode("123456"));
             admin.setUserRole(UserRole.ROLE_ADMIN);
-
-//            User kiosk = new User();
-//            kiosk.setEmail("kiosk@kiosk.cz");
-//            kiosk.setFirstName("Kiosk");
-//            kiosk.setLastName("Kiosk");
-//            admin.setPassword(passwordEncoder.encode("123456"));
-//            kiosk.setUserRole(UserRole.ROLE_KIOSK);
-//
-//            User user = new User();
-//            user.setEmail("user@user.cz");
-//            user.setFirstName("User");
-//            user.setLastName("User");
-//            admin.setPassword(passwordEncoder.encode("123456"));
-//            user.setUserRole(UserRole.ROLE_USER);
-
             userRepository.save(admin);
-//            userRepository.save(kiosk);
-//            userRepository.save(user);
+
+            User kiosk = new User();
+            kiosk.setEmail("kiosk@kiosk.cz");
+            kiosk.setFirstName("Kiosk");
+            kiosk.setLastName("Kiosk");
+            kiosk.setPassword(passwordEncoder.encode("123456"));
+            kiosk.setUserRole(UserRole.ROLE_KIOSK);
+            userRepository.save(kiosk);
+
+            User user = new User();
+            user.setEmail("user@user.cz");
+            user.setFirstName("User");
+            user.setLastName("User");
+            user.setPassword(passwordEncoder.encode("123456"));
+            user.setUserRole(UserRole.ROLE_USER);
+            userRepository.save(user);
         }
     }
 }
