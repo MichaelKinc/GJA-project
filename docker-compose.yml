@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+    mydb:
+      container_name: mydb
+      image: mysql
+      ports:
+        - "3307:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=password1                    #default password of the MySQL container
+        - MYSQL_DATABASE=welli
+        - MYSQL_USER=letmeinuser1
+        - MYSQL_PASSWORD=password1
+      volumes:
+        - ./data:/var/lib/mysql                         #database data volume
+        - ./src/main/db:/docker-entrypoint-initdb.d/:ro #database files called when the container is built and started for the first time
+#    web:
+#      depends_on:
+#        - mydb
+#      container_name: letMeIn
+#      build: .
+#      ports:
+#        - "8080:8080"

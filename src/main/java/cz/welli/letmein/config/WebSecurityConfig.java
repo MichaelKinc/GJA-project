@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -27,29 +28,29 @@ import javax.sql.DataSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-@Autowired
-private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
-@Bean
-public UserDetailsService userDetailsService() {
-return new CustomUserDetails();
-}
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new CustomUserDetails();
+    }
 
 
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
 
-@Bean
-public DaoAuthenticationProvider authenticationProvider() {
-DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-authProvider.setUserDetailsService(userDetailsService());
-authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
 
-return authProvider;
-}
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) {
+        auth.authenticationProvider(authenticationProvider());
+    }
 
-@Override
-protected void configure(AuthenticationManagerBuilder auth) {
-auth.authenticationProvider(authenticationProvider());
-}
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/resources/**");
@@ -75,35 +76,22 @@ auth.authenticationProvider(authenticationProvider());
                 .and().formLogin().loginPage("/login").successHandler(authenticationSuccessHandler).permitAll()
                 .and().logout().permitAll()
                 .and().csrf();
-        //        http.csrf().disable();
     }
 
-
-
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
-//        authenticationMgr.inMemoryAuthentication()
-//                .withUser("userrr").password("{noop}userrr").authorities("ROLE_USER").and()
-//                .withUser("adminn").password("{noop}adminn").authorities("ROLE_ADMIN").and()
-//                .withUser("kioskk").password("{noop}kioskk").authorities("ROLE_KIOSK");
+////todo replace with bcrypt which is commented lower
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        // This PasswordEncoder is provided for legacy and testing purposes only
+//        // and is not considered secure. A password encoder that does nothing.
+//        @SuppressWarnings("deprecation")
+//        PasswordEncoder pe = NoOpPasswordEncoder.getInstance();
+//
+//        return pe;
 //    }
 
-
-
-//todo replace with bcrypt which is commented lower
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        // This PasswordEncoder is provided for legacy and testing purposes only
-        // and is not considered secure. A password encoder that does nothing.
-        @SuppressWarnings("deprecation")
-        PasswordEncoder pe = NoOpPasswordEncoder.getInstance();
-
-        return pe;
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
-
-    //@Bean
-//public BCryptPasswordEncoder passwordEncoder() {
-//return new BCryptPasswordEncoder();
-//}
 
 }

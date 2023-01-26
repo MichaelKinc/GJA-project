@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.sql.SQLIntegrityConstraintViolationException;
 
 @Controller
 public class Registration {
@@ -27,17 +24,22 @@ public class Registration {
         return "register";
     }
 
-
     @PostMapping("/process_register")
     public String processRegister(User user, RedirectAttributes redirectAttrs) {
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        String encodedPassword = passwordEncoder.encode(user.getPassword());
-//        user.setPassword(encodedPassword);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
 
+        User dbUser = userRepo.findByEmail(user.getEmail());
+        if(dbUser != null) {
+            redirectAttrs.addFlashAttribute("errorMsg", "E-mail je již asociován s existujícím účtem.");
+            return "redirect:/register";
+        }
         try {
             userRepo.save(user);
         } catch (Exception e) {
-            redirectAttrs.addFlashAttribute("errorMsg", "E-mail je již asociován s existujícím účtem.");
+            redirectAttrs.addFlashAttribute("errorMsg", "Neočekáváná chyba při vytváření účtu." +
+                    " Zkuste to prosím později");
             return "redirect:/register";
         }
 

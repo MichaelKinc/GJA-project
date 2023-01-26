@@ -72,6 +72,10 @@ public class User {
         return userRole.toString();
     }
 
+    public void setUserRole(UserRole role) {
+        this.userRole = role;
+    }
+
     public String getFullName() {
         return firstName +" "+ lastName;
     }
