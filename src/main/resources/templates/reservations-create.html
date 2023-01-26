@@ -70,7 +70,7 @@
                     <ul>
                         <li th:each="slot: ${slots}">
                             <input type="radio" th:field="*{start}" th:value="${slot.getFrom()}">
-                            <label th:for="${#ids.prev('start')}" th:text="${slot.getFrom() + '-' + slot.getTo() + ': ' + slot.getAvailableCapacity() + '/' + slot.getMaxCapacity()}"></label>
+                            <label th:for="${#ids.prev('start')}" th:text="${slot.getFrom() + '-' + slot.getTo() + ': ' + (slot.getMaxCapacity() - slot.getAvailableCapacity()) + '/' + slot.getMaxCapacity()}"></label>
                         </li>
                     </ul>
 
@@ -108,16 +108,23 @@
                     </div>
                 </div>
 
-                <button type="submit" name="action" value="back">Zpět</button>
-                <button
-                        type="submit"
-                        name="action"
-                        value="next"
-                        class="mt-4 font-medium inline-flex items-center gap-x-1 bg-indigo-500 hover:bg-indigo-400 transition-colors duration-150 rounded-md font-semibold px-6 py-3 text-white"
-                        th:text="${step != 5} ? 'Další krok' : 'Potvrdit a rezervovat'"
-                >
-                    Další krok
-                </button>
+                <div class="flex flex-row gap-x-2 mt-4">
+                    <button th:if="${step > 1}"
+                            type="submit" name="action" value="back"
+                            class="font-medium text-indigo-500 inline-flex items-center gap-x-1 bg-white hover:bg-slate-400 hover:text-gray-900 transition-colors duration-150 rounded-md font-semibold px-6 py-3"
+                    >
+                        Zpět
+                    </button>
+                    <button
+                            type="submit"
+                            name="action"
+                            value="next"
+                            class="flex-1 font-medium inline-flex items-center gap-x-1 bg-indigo-500 hover:bg-indigo-400 transition-colors duration-150 rounded-md font-semibold px-6 py-3 text-white"
+                            th:text="${step != 5} ? 'Další krok' : 'Potvrdit a rezervovat'"
+                    >
+                        Další krok
+                    </button>
+                </div>
             </form>
         </div>
     </div>

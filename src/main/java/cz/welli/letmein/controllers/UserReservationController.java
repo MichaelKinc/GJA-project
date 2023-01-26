@@ -200,6 +200,12 @@ public class UserReservationController {
             while (start != end) {
                 LocalDateTime composedDateTime = selectedDate.atTime(start);
 
+                if (composedDateTime.isBefore(LocalDateTime.now())) {
+                    // Increment to next slot
+                    start = start.plusHours(hoursStep);
+                    continue;
+                }
+
                 System.out.println("Composed LocalDateTime: " + composedDateTime);
 
                 List<Reservation> existingReservations = reservationRepository.findByDateTime(selectedPlace, composedDateTime);
