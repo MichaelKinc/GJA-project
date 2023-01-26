@@ -3,6 +3,9 @@ package cz.welli.letmein.models;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * Entity of Device
+ */
 @Entity
 @Table(name = "devices")
 public class Device {
