@@ -65,7 +65,7 @@
                     <input type="date" id="date" th:field="*{date}" class="w-full rounded border px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500" th:classappend="${param.error} ? 'border-red-400' : 'border-slate-400'">
                 </div>
                 <div th:if="${step == 4}">
-                    <label class="font-medium mb-4">Termín</label>
+                    <label class="font-medium mb-4">Zvolte termín</label>
 
                     <ul>
                         <li th:each="slot: ${slots}">
@@ -74,9 +74,9 @@
                         </li>
                     </ul>
 
-                    <div class="flex-1">
+                    <div class="flex-1 flex gap-x-2 items-center mt-2">
                         <label for="requiredCapacity">Počet osob:</label>
-                        <input type="number" min="1" th:field="*{requiredCapacity}" id="requiredCapacity" th:value="1" class="bg-slate-200 border border-slate-600">
+                        <input type="number" min="1" th:field="*{requiredCapacity}" id="requiredCapacity" value="1" class="rounded border border-slate-400 px-4 py-2 placeholder:text-slate-400 focus:outline-indigo-500">
                     </div>
                 </div>
 

@@ -83,7 +83,22 @@ public class UserReservationController {
 
     @GetMapping("/user/reservations")
     public String getReservations (Model model) {
+        String activeUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        User activeUser = userRepository.findByEmail(activeUserEmail);
+        List<Reservation> userReservations = reservationRepository.findByUser(activeUser);
+
+        model.addAttribute("reservations", userReservations);
+        model.addAttribute("now", LocalDateTime.now());
         return "reservations";
+    }
+
+    @PostMapping("/user/reservations/delete/{id}")
+    public String deleteReservation (@PathVariable("id") Long id) {
+        Optional<Reservation> reservation = reservationRepository.findById(id);
+        if (reservation.isPresent() && LocalDateTime.now().isBefore(reservation.get().getStart())) {
+            reservationRepository.deleteById(id);
+        }
+        return "redirect:/user/reservations";
     }
 
     @GetMapping("/user/reservations/create")
